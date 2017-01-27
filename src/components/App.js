@@ -6,10 +6,13 @@ import { Toolbar, ToolbarTitle } from 'material-ui/Toolbar'
 import IconButton from 'material-ui/IconButton'
 import NotificationsIcon from 'material-ui/svg-icons/social/notifications'
 import Badge from 'material-ui/Badge'
-import Popover from 'material-ui/Popover'
 
-import VisibleEventList from './VisibleEventList'
+
 import AddEvent from './AddEvent'
+import MarkReaded from './MarkReaded'
+import DeleteAllEvents from './DeleteAllEvents'
+import TogglePopover from './TogglePopover'
+import PopoverComponent from './PopoverComponent'
 
 const badgeStyles = {
   badge: {
@@ -49,24 +52,18 @@ class App extends Component {
         <MuiThemeProvider>
           <Toolbar>
             <ToolbarTitle text="Quantify the World" />
-            <Badge badgeContent={4} primary={true} style={badgeStyles.badge}>
+            <Badge id="assa" badgeContent={4} primary={true} style={badgeStyles.badge}>
               <IconButton onTouchTap={this.handleTouchTap}>
                 <NotificationsIcon/>
               </IconButton>
             </Badge>
-            <Popover
-              open={this.state.openPopover}
-              anchorEl={this.state.anchorEl}
-              anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
-              targetOrigin={{ horizontal: 'right', vertical: 'top' }}
-              onRequestClose={this.handleRequestClose}
-              >
-                Assa
-              </Popover>
-            </Toolbar>
-          </MuiThemeProvider>
-          <AddEvent />
-          <VisibleEventList />
+            <PopoverComponent />
+          </Toolbar>
+        </MuiThemeProvider>
+        <AddEvent />
+        <MarkReaded />
+        <DeleteAllEvents />
+        <TogglePopover />
       </div>
     )
   }
