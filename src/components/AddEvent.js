@@ -3,26 +3,36 @@ import { connect } from 'react-redux'
 
 import { addEvent } from '../actions'
 
-let AddEvent = ({ dispatch }) => {
-  let input
+class AddEvent extends React.Component {
+  componentDidMount() {
+    this.timerID = setInterval(
+      () => this.props.dispatch(addEvent('Random')), 20000
+    )
+  }
 
-  return (
-    <div>
-      <form onSubmit={event => {
-        event.preventDefault()
-        if (!input.value.trim()) {
-          return
-        }
-        dispatch(addEvent(input.value))
-        input.value = ''
-      }}>
-        <input ref={node => input = node} />
-        <button type="submit">
-          Add Event
-        </button>
-      </form>
-    </div>
-  )
+  componentWillUnmount() {
+    clearInterval(this.timerID)
+  }
+
+  render() {
+    return (
+      <div>
+        <form onSubmit={event => {
+          event.preventDefault()
+          if (!this.input.value.trim()) {
+            return
+          }
+          this.props.dispatch(addEvent(this.input.value))
+          this.input.value = ''
+        }}>
+          <input ref={node => this.input = node} />
+          <button type="submit">
+            Add Event
+          </button>
+        </form>
+      </div>
+    )
+  }
 }
 
 AddEvent = connect()(AddEvent)
