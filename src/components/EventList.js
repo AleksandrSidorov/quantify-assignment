@@ -1,14 +1,30 @@
 import React, { PropTypes } from 'react'
+import moment from 'moment'
+
+import { List, ListItem } from 'material-ui/List'
+
+import ShowAll from './ShowAll'
+
+const toRecent = (date) => {
+  moment.locale('ru')
+  return moment(date).fromNow()
+}
 
 const EventList = ({ events }) => (
-  <ul>
+  <List>
     {events.map(event =>
-      <li key={event.id}>
-        {event.title} - {event.unread.toString()} - {event.datetime.toLocaleString()}
-      </li>
+      <ListItem
+        key={event.id}
+        primaryText={event.title}
+        secondaryText={toRecent(event.datetime)}
+      />
     )}
-  </ul>
+    <ListItem>
+      <ShowAll />
+    </ListItem>
+  </List>
 )
+
 
 EventList.propTypes = {
   events: PropTypes.arrayOf(PropTypes.shape({

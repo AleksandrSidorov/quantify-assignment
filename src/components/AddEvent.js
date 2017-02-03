@@ -1,12 +1,23 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import TextField from 'material-ui/TextField'
+import RaisedButton from 'material-ui/RaisedButton'
+
 import { addEvent } from '../actions'
 
 class AddEvent extends React.Component {
+  constructor() {
+    super()
+    this.state = {
+      input: ''
+    }
+  }
+
   componentDidMount() {
     this.timerID = setInterval(
-      () => this.props.dispatch(addEvent('Random')), 20000
+      () => this.props.dispatch(addEvent('Random Event')), 20000
     )
   }
 
@@ -14,22 +25,32 @@ class AddEvent extends React.Component {
     clearInterval(this.timerID)
   }
 
+  handleInputChange = (event) => {
+    this.setState({
+      input: event.target.value
+    })
+  }
+
   render() {
     return (
       <div>
+        <MuiThemeProvider>
         <form onSubmit={event => {
           event.preventDefault()
-          if (!this.input.value.trim()) {
+          if (!this.state.input.trim()) {
             return
           }
-          this.props.dispatch(addEvent(this.input.value))
-          this.input.value = ''
+          this.props.dispatch(addEvent(this.state.input))
+          this.setState({ input: '' })
         }}>
-          <input ref={node => this.input = node} />
-          <button type="submit">
-            Add Event
-          </button>
+            <TextField
+              onChange={this.handleInputChange}
+              value={this.state.input}
+              hintText="Event Text"
+            />
+            <RaisedButton label="Add Event" type="submit" />
         </form>
+      </MuiThemeProvider>
       </div>
     )
   }

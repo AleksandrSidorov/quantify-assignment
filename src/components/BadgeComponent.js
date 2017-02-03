@@ -5,6 +5,8 @@ import IconButton from 'material-ui/IconButton'
 import NotificationsIcon from 'material-ui/svg-icons/social/notifications'
 import Badge from 'material-ui/Badge'
 
+import { togglePopover } from '../actions'
+
 const badgeStyles = {
   badge: {
     padding: 0
@@ -16,6 +18,7 @@ class BadgeComponent extends React.Component {
     return (
       <Badge
         id="assa"
+        onClick={() => this.props.dispatch(togglePopover())}
         badgeContent={this.props.unreadNumber}
         primary={true}
         style={badgeStyles.badge}

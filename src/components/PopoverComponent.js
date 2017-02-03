@@ -4,7 +4,6 @@ import { connect } from 'react-redux'
 import Popover from 'material-ui/Popover'
 
 import VisibleEventList from './VisibleEventList'
-import ShowAll from './ShowAll'
 import { togglePopover } from '../actions'
 
 
@@ -20,7 +19,6 @@ class PopoverComponent extends React.Component {
         onRequestClose={() => this.props.dispatch(togglePopover())}
         >
           <VisibleEventList />
-          <ShowAll />
         </Popover>
     )
   }
