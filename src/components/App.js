@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import injectTapEventPlugin from 'react-tap-event-plugin'
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
-import { Toolbar, ToolbarTitle } from 'material-ui/Toolbar'
+import { Toolbar, ToolbarGroup, ToolbarTitle } from 'material-ui/Toolbar'
 
 import BadgeComponent from './BadgeComponent'
 import PopoverComponent from './PopoverComponent'
@@ -19,9 +19,13 @@ class App extends Component {
       <div>
         <MuiThemeProvider>
           <Toolbar>
-            <ToolbarTitle text="Quantify the World" />
-            <BadgeComponent />
-            <PopoverComponent />
+            <ToolbarGroup>
+              <ToolbarTitle text="Quantify the World" />
+            </ToolbarGroup>
+            <ToolbarGroup>
+              <BadgeComponent />
+              <PopoverComponent />
+            </ToolbarGroup>
           </Toolbar>
         </MuiThemeProvider>
         <AddEvent />
